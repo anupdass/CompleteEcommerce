@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home/Home";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Order from "./pages/Order/Order";
+import Images from "./pages/Image/Images";
+import Dinfo from "./pages/Dinfo/Dinfo";
+import Cart from "./components/Cart/Cart";
+import CartPage from "./pages/CartPage/CartPage";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
+import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
+
+
+export const datacontext = createContext()
 
 function App() {
+  const [cart, setCart] = useState([])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <datacontext.Provider value={[cart, setCart]}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/image" element={<Images />} />
+          <Route path="/dinfo" element={<Dinfo />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/placeorder" element={<PlaceOrder />} />
+        </Routes>
+        <Cart />
+        <Footer />
+      </BrowserRouter>
+    </datacontext.Provider>
   );
 }
 
