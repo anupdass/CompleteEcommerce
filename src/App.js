@@ -20,8 +20,9 @@ export const datacontext = createContext()
 
 function App() {
   const [cart, setCart] = useState([])
+  const [order, setOrder] = useState([])
   return (
-    <datacontext.Provider value={[cart, setCart]}>
+    <datacontext.Provider value={{ cart: [cart, setCart], order: [order, setOrder] }}>
       <BrowserRouter>
         <Navbar />
         <Routes>

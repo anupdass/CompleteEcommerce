@@ -6,7 +6,7 @@ import ProductItem from './ProductItem';
 
 const Products = () => {
     const [products, setProducts] = useState([])
-    const [selected, setSelected] = useState('mens')
+    const [selected, setSelected] = useState('')
     const [loading, setLoading] = useState(true)
     const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -24,7 +24,7 @@ const Products = () => {
 
 
     const selectCategory = (e) => {
-        setSelected(e)
+        setSelected(e.toLowerCase())
 
     }
 
@@ -44,15 +44,26 @@ const Products = () => {
                     :
                     <div className='grid md:grid-cols-4 xl:grid-cols-5 grid-cols-2 md:gap-5 mt-4 gap-3 '>
                         {
-                            products.map(item => <ProductItem
-                                key={item.id}
-                                name={item.title}
-                                img={item.image}
-                                // oldPrice={item.price}
-                                id={item.id}
-                                newPrice={item.price}
+                            selected.length > 0 ?
+                                filter.map(item => <ProductItem
+                                    key={item.id}
+                                    name={item.title}
+                                    img={item.image}
+                                    // oldPrice={item.price}
+                                    id={item.id}
+                                    newPrice={item.price}
 
-                            ></ProductItem>)
+                                ></ProductItem>)
+                                :
+                                products.map(item => <ProductItem
+                                    key={item.id}
+                                    name={item.title}
+                                    img={item.image}
+                                    // oldPrice={item.price}
+                                    id={item.id}
+                                    newPrice={item.price}
+
+                                ></ProductItem>)
                         }
                     </div>
             }

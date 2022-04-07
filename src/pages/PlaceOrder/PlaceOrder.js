@@ -1,19 +1,25 @@
 import cogoToast from 'cogo-toast';
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, } from 'react-router-dom';
 import { datacontext } from '../../App';
 
 const PlaceOrder = () => {
 
-    const [cart, setcart] = useContext(datacontext)
+    const { cart, order } = useContext(datacontext)
+    const [carts, setCart] = cart
+    const [orders, setOrders] = order
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
+    const history = useNavigate()
+
     const onSubmit = data => {
-        setcart([])
+        setCart([])
+        const newCart = [...orders, ...carts]
+        setOrders(newCart)
         cogoToast.success('Successfully Complete Order ')
         reset()
-        console.log(data)
+        history('/order')
     };
 
 
@@ -25,6 +31,9 @@ const PlaceOrder = () => {
                 </div>
                 <div className='md:min-w-[500px] p-5'>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className='my-3' >
+                            <label>Total Price: </label>
+                        </div>
                         <div className='my-3' >
                             <label>Name*</label>
                             <input className='border-2 border-gray-200 rounded-md p-2 w-full' {...register("name", { required: true })} placeholder='your name' />
@@ -46,13 +55,13 @@ const PlaceOrder = () => {
                             {errors.exampleRequired && <span className='text-red-600'>This field is required</span>}
                         </div>
 
-                        <Link to={'/order'}><input className='bg-green-400 p-3 text-xl rounded-md w-full hover:bg-green-500 cursor-pointer' type="submit" /></Link>
+                        <input className='bg-green-400 p-3 text-xl rounded-md w-full hover:bg-green-500 cursor-pointer' type="submit" />
                     </form>
                 </div>
 
             </div>
 
-        </div>
+        </div >
     );
 };
 

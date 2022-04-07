@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { BiMenu } from 'react-icons/bi';
 import { GrClose } from 'react-icons/gr';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
@@ -8,7 +8,6 @@ import { datacontext } from '../../App';
 
 const Navbar = () => {
     const [menu, setMenu] = useState(true)
-    const [cart] = useContext(datacontext)
     return (
         <div className='w-full py-3  bg-green-300 shadow-md sticky top-0 z-50'>
             <div className="container mx-auto">

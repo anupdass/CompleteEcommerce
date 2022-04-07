@@ -11,7 +11,8 @@ import Size from '../SizeColor/Size';
 
 const ProductDetails = () => {
 
-    const [cart, setCart] = useContext(datacontext)
+    const { cart } = useContext(datacontext)
+    const [carts, setCart] = cart
     const [product, setProduct] = useState()
     const [quantity, setquntity] = useState(1)
     const [size, selectedSize] = useState('M')
@@ -46,13 +47,13 @@ const ProductDetails = () => {
     }
 
     const addToCart = () => {
-        const id = cart.map(item => { return item.id })
+        const id = carts.map(item => { return item.id })
         if (id.includes(product.id)) {
             cogoToast.warn('all ready in cart')
             return
         } else {
             const item = { ...product, quantity, size, color }
-            const newCart = [...cart, item]
+            const newCart = [...carts, item]
             setCart(newCart)
             cogoToast.success('add to cart')
         }
