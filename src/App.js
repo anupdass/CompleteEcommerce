@@ -11,7 +11,6 @@ import Order from "./pages/Order/Order";
 import Images from "./pages/Image/Images";
 import Dinfo from "./pages/Dinfo/Dinfo";
 import Cart from "./components/Cart/Cart";
-import CartPage from "./pages/CartPage/CartPage";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 
@@ -31,7 +30,6 @@ function App() {
           <Route path="/image" element={<Images />} />
           <Route path="/dinfo" element={<Dinfo />} />
           <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/cart" element={<CartPage />} />
           <Route path="/placeorder" element={<PlaceOrder />} />
         </Routes>
         <Cart />
